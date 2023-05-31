@@ -17,11 +17,9 @@ class ExerciseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityExerciseBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
-        val timerText = findViewById<TextView>(R.id.text_view_timer)
-        timerText.text = "${totalSeconds / 1000}"
 
         setUpTimerView()
         setSupportActionBar(binding?.toolBarExercise)
