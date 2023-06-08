@@ -13,7 +13,7 @@ object Constants {
         val wallSit = ExerciseModel(2, "Wall sit", R.drawable.ic_wall_sit, false, false)
         list.add(wallSit)
 
-        val pushUp = ExerciseModel(3, "Push up", R.drawable.ic_push_up, false, false)
+        val pushUp = ExerciseModel(3, "Push ups", R.drawable.ic_push_up, false, false)
         list.add(pushUp)
 
         val abdominalCrunch = ExerciseModel(4, "Abdominal Crunch", R.drawable.ic_abdominal_crunch, false, false)
