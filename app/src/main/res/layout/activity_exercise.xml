@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,24 +22,25 @@
         android:id="@+id/text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tool_bar_exercise"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="100dp"
-        android:text="GET READY FOR"
-        android:textSize="30sp"
+        android:layout_marginTop="150dp"
+        android:text="GET READY"
         android:textColor="@color/colorAccent"
+        android:textSize="30sp"
         android:textStyle="bold"
-        />
+        app:layout_constraintBottom_toTopOf="@+id/frame_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar_exercise" />
+
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_marginTop="25dp"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:visibility="visible"
-        tools:visibility="gone"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        tools:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view"
         android:background="@drawable/circular_color_accent_border">
         
@@ -60,8 +62,7 @@
             android:layout_height="60dp"
             android:background="@drawable/circular_color_background"
             android:gravity="center"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center">
 
         <TextView
             android:id="@+id/text_view_timer"
@@ -74,20 +75,71 @@
             android:layout_gravity="center"
             android:visibility="visible"
             />
-
+        </LinearLayout>
     </FrameLayout>
 
+    <TextView
+        android:id="@+id/upcoming_exercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upcoming exercise:"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frame_layout"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/name_of_exercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Exercise"
+        android:textStyle="italic"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upcoming_exercise"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="15dp"/>
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:contentDescription="@string/image_view"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_jumping_jacks"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/exercise_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar_exercise" />
+
+    <TextView
+        android:id="@+id/exercise_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:text="Exercise"
+        android:textColor="@color/colorAccent"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_view"
+        app:layout_constraintBottom_toTopOf="@id/frame_layout_exercise"
+        tools:visibility="visible" />
 
     <FrameLayout
         android:id="@+id/frame_layout_exercise"
-        android:layout_marginTop="25dp"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:visibility="gone"
         tools:visibility="visible"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exercise_text_view"
         android:background="@drawable/circular_color_accent_border">
 
         <ProgressBar
@@ -109,7 +161,7 @@
             android:background="@drawable/circular_color_background"
             android:gravity="center"
             android:layout_gravity="center"
-            />
+            >
 
         <TextView
             android:id="@+id/text_view_exercise"
@@ -122,7 +174,7 @@
             android:layout_gravity="center"
             android:visibility="visible"
             />
-
+        </LinearLayout>
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

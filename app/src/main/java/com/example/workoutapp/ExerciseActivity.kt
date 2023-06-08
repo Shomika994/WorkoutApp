@@ -6,6 +6,7 @@ import android.os.CountDownTimer
 import android.view.View
 import android.widget.Toast
 import com.example.workoutapp.databinding.ActivityExerciseBinding
+import java.util.ArrayList
 
 class ExerciseActivity : AppCompatActivity() {
 
@@ -16,6 +17,8 @@ class ExerciseActivity : AppCompatActivity() {
     private var progress = 0
     private var countDownExerciseTimer: CountDownTimer? = null
     private var exerciseProgress = 0
+    private var exerciseList: ArrayList<ExerciseModel>? = null
+    private var currentExercisePosition = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +27,8 @@ class ExerciseActivity : AppCompatActivity() {
         setContentView(binding?.root)
 
         setSupportActionBar(binding?.toolBarExercise)
+
+        exerciseList = Constants.exerciseList()
 
         if(supportActionBar != null){
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -37,22 +42,37 @@ class ExerciseActivity : AppCompatActivity() {
     }
 
     private fun setUpTimerView(){
+        binding?.frameLayout?.visibility = View.VISIBLE
+        binding?.textView?.visibility = View.VISIBLE
+        binding?.exerciseTextView?.visibility = View.INVISIBLE
+        binding?.frameLayoutExercise?.visibility = View.INVISIBLE
+        binding?.imageView?.visibility = View.INVISIBLE
+        binding?.nameOfExercise?.text = exerciseList!![currentExercisePosition + 1].getName()
+
         if(countDownTimer != null){
             countDownTimer?.cancel()
             progress = 0
         }
+
         setRestProgressBar()
     }
 
     private fun setExerciseView(){
         binding?.frameLayout?.visibility = View.INVISIBLE
-        binding?.textView?.text = "Exercise"
+        binding?.textView?.visibility = View.INVISIBLE
+        binding?.exerciseTextView?.visibility = View.VISIBLE
         binding?.frameLayoutExercise?.visibility = View.VISIBLE
+        binding?.imageView?.visibility = View.VISIBLE
+        binding?.upcomingExercise?.visibility = View.INVISIBLE
+        binding?.nameOfExercise?.visibility = View.INVISIBLE
 
         if(countDownExerciseTimer != null){
             countDownExerciseTimer?.cancel()
             exerciseProgress = 0
         }
+        binding?.imageView?.setImageResource(exerciseList!![currentExercisePosition].getImage())
+        binding?.exerciseTextView?.text = exerciseList!![currentExercisePosition].getName()
+
         setExerciseProgressBar()
     }
 
@@ -71,6 +91,7 @@ class ExerciseActivity : AppCompatActivity() {
                 remainingTime--
             }
             override fun onFinish(){
+                currentExercisePosition++
                 setExerciseView()
             }
         }.start()
@@ -92,9 +113,26 @@ class ExerciseActivity : AppCompatActivity() {
                 remainingTimeExercise--
             }
             override fun onFinish(){
-                Toast.makeText(applicationContext, "Finished", Toast.LENGTH_SHORT).show()
+                binding?.upcomingExercise?.visibility = View.VISIBLE
+                binding?.nameOfExercise?.visibility = View.VISIBLE
+                binding?.nameOfExercise?.text = exerciseList!![currentExercisePosition].getName()
+
+                if(currentExercisePosition < exerciseList?.size!! - 1){
+                    setUpTimerView()
+                }else {
+                    lastView()
+                    Toast.makeText(this@ExerciseActivity, "Congratulations!", Toast.LENGTH_SHORT).show()
+                }
             }
         }.start()
+    }
+
+    private fun lastView(){
+        binding?.imageView?.visibility = View.INVISIBLE
+        binding?.upcomingExercise?.visibility = View.INVISIBLE
+        binding?.nameOfExercise?.visibility = View.INVISIBLE
+        binding?.exerciseTextView?.visibility = View.INVISIBLE
+        binding?.frameLayoutExercise?.visibility = View.INVISIBLE
     }
 
     public override fun onDestroy(){
