@@ -8,7 +8,10 @@ import android.os.CountDownTimer
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
+import android.widget.Adapter
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.workoutapp.databinding.ActivityExerciseBinding
 import java.util.ArrayList
 import java.util.Locale
@@ -26,6 +29,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var currentExercisePosition = -1
     private var textToSpeech: TextToSpeech? = null
     private var player: MediaPlayer? = null
+    private var adapter: ExerciseStatusAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,6 +50,13 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             click.onBackPressed()
         }
         setUpTimerView()
+        setUpExerciseList()
+    }
+
+    private fun setUpExerciseList() {
+        binding?.recycleViewExercise?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        adapter = ExerciseStatusAdapter(exerciseList!!)
+        binding?.recycleViewExercise?.adapter = adapter
     }
 
     private fun setUpTimerView(){
@@ -64,7 +75,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         binding?.exerciseTextView?.visibility = View.INVISIBLE
         binding?.frameLayoutExercise?.visibility = View.INVISIBLE
         binding?.imageView?.visibility = View.INVISIBLE
-        binding?.nameOfExercise?.text = exerciseList!![currentExercisePosition + 1].getName()
+        binding?.nameOfExercise?.text = exerciseList!![currentExercisePosition + 1].name
 
         if(countDownTimer != null){
             countDownTimer?.cancel()
@@ -87,10 +98,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             countDownExerciseTimer?.cancel()
             exerciseProgress = 0
         }
-        binding?.imageView?.setImageResource(exerciseList!![currentExercisePosition].getImage())
-        binding?.exerciseTextView?.text = exerciseList!![currentExercisePosition].getName()
+        binding?.imageView?.setImageResource(exerciseList!![currentExercisePosition].image)
+        binding?.exerciseTextView?.text = exerciseList!![currentExercisePosition].name
 
-        speakOut(exerciseList!![currentExercisePosition].getName())
+        speakOut(exerciseList!![currentExercisePosition].name)
         setExerciseProgressBar()
     }
 
@@ -133,7 +144,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             override fun onFinish(){
                 binding?.upcomingExercise?.visibility = View.VISIBLE
                 binding?.nameOfExercise?.visibility = View.VISIBLE
-                binding?.nameOfExercise?.text = exerciseList!![currentExercisePosition].getName()
+                binding?.nameOfExercise?.text = exerciseList!![currentExercisePosition].name
                 speakOut("REST!")
                 if(currentExercisePosition < exerciseList?.size!! - 1){
                     setUpTimerView()
