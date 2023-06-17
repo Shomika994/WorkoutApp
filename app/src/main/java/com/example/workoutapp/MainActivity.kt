@@ -1,8 +1,8 @@
 package com.example.workoutapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.workoutapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,12 +14,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        binding?.frameLayout?.setOnClickListener{
+        binding?.frameLayout?.setOnClickListener {
             val intent = Intent(this, ExerciseActivity::class.java)
             startActivity(intent)
         }
-
-
     }
 
     override fun onDestroy() {
