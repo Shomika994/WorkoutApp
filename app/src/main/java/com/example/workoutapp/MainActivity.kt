@@ -11,11 +11,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
         binding?.frameLayout?.setOnClickListener {
             val intent = Intent(this, ExerciseActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding?.bmiFrameLayout?.setOnClickListener{
+            val intent = Intent(this, BmiActivity::class.java)
             startActivity(intent)
         }
     }

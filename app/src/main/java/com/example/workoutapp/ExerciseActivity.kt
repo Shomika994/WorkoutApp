@@ -1,5 +1,6 @@
 package com.example.workoutapp
 
+import android.app.Dialog
 import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
@@ -11,6 +12,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.workoutapp.databinding.ActivityExerciseBinding
+import com.example.workoutapp.databinding.CustomDialogBinding
 import java.util.Locale
 
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
@@ -43,11 +45,30 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
         binding?.toolBarExercise?.setNavigationOnClickListener {
-            val click = onBackPressedDispatcher
-            click.onBackPressed()
+            onClickBackDialog()
         }
         setUpTimerView()
         setUpExerciseList()
+
+    }
+
+    override fun onBackPressed() {
+        onClickBackDialog()
+    }
+
+    private fun onClickBackDialog(){
+        val dialog = Dialog(this)
+        val dialogBinding = CustomDialogBinding.inflate(layoutInflater)
+        dialog.setContentView(dialogBinding.root)
+        dialog.setCanceledOnTouchOutside(false)
+        dialogBinding.buttonYes.setOnClickListener{
+            this@ExerciseActivity.finish()
+            dialog.dismiss()
+        }
+        dialogBinding.buttonNo.setOnClickListener{
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
     private fun setUpExerciseList() {
