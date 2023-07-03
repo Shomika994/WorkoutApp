@@ -20,8 +20,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding?.bmiFrameLayout?.setOnClickListener{
+        binding?.bmiFrameLayout?.setOnClickListener {
             val intent = Intent(this, BmiActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding?.historyFrameLayout?.setOnClickListener {
+            val intent = Intent(this, ExerciseHistoryActivity::class.java)
             startActivity(intent)
         }
     }

@@ -11,70 +11,97 @@
         android:id="@+id/image_view"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        app:layout_constraintBottom_toTopOf="@+id/frame_layout"
-        android:src="@drawable/minutes_workout_image"
-        android:scaleType="fitXY"
         android:contentDescription="@string/image_view"
-        />
-   
-   <FrameLayout
-       android:id="@+id/frame_layout"
-       android:layout_width="150dp"
-       android:layout_height="150dp"
-       app:layout_constraintLeft_toLeftOf="parent"
-       app:layout_constraintRight_toRightOf="parent"
-       app:layout_constraintTop_toBottomOf="@+id/image_view"
-       android:background="@drawable/border_ripple_background"
-       android:layout_marginTop="50dp"
-       >
+        android:scaleType="fitXY"
+        android:src="@drawable/minutes_workout_image"
+        app:layout_constraintBottom_toTopOf="@+id/frame_layout" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="START"
-        android:layout_gravity="center"
-        android:textSize="22sp"
-        android:textColor="@color/lightBlue"
-        android:textStyle="bold"
-        />
-   
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/border_ripple_background"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_view">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="START"
+            android:textColor="@color/lightBlue"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
 
-   </FrameLayout>
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/bmi_frame_layout"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frame_layout"
-        android:background="@drawable/bmi_drawable"
         android:layout_marginTop="50dp"
-        >
+        android:background="@drawable/bmi_drawable"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/history_frame_layout"
+        app:layout_constraintTop_toBottomOf="@+id/frame_layout">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BMI"
             android:layout_gravity="center"
-            android:textSize="22sp"
+            android:text="BMI"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            />
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/another_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="BMI Calculator"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@id/bmi_frame_layout"
+        app:layout_constraintRight_toRightOf="@id/bmi_frame_layout"
+        app:layout_constraintTop_toBottomOf="@id/bmi_frame_layout" />
+
+    <FrameLayout
+        android:id="@+id/history_frame_layout"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bmi_drawable"
+        app:layout_constraintLeft_toLeftOf="@id/bmi_frame_layout"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frame_layout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:src="@drawable/calendar" />
 
     </FrameLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/bmi_frame_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="5dp"
-        android:textStyle="bold"
-        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:text="History"
         android:textColor="@color/colorAccent"
-        android:text="CALCULATOR"/>
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/history_frame_layout"
+        app:layout_constraintStart_toStartOf="@id/history_frame_layout"
+        app:layout_constraintTop_toBottomOf="@id/history_frame_layout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
