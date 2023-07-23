@@ -19,8 +19,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var binding: ActivityExerciseBinding? = null
     private var countDownTimer: CountDownTimer? = null
-    private var totalSeconds = 1
-    private var totalSecExercise =1
+    private var totalSeconds = 10
+    private var totalSecExercise =30
     private var progress = 0
     private var countDownExerciseTimer: CountDownTimer? = null
     private var exerciseProgress = 0
