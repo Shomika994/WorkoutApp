@@ -14,8 +14,8 @@
         android:layout_height="?android:attr/actionBarSize"
         android:id="@+id/tool_bar_exercise"
         android:theme="@style/ToolbarTheme"
-        android:background="@color/white"
-        app:titleTextColor="@color/black"
+        android:background="@color/colorAccent"
+        app:titleTextColor="@color/white"
         />
 
     <TextView

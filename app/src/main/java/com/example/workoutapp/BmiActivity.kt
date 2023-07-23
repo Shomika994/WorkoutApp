@@ -153,6 +153,12 @@ class BmiActivity : AppCompatActivity() {
         val inch = binding?.InputImperialUnitInch?.text?.toString()?.trim()?.toFloatOrNull()
 
         when {
+
+            inch == null && feet == null && weight == null -> {
+                Toast.makeText(this, "Please populate feet, inches and weight!", Toast.LENGTH_SHORT).show()
+                return false
+            }
+
             weight == null && inch == null -> {
                 Toast.makeText(this, "Please populate weight and inches!", Toast.LENGTH_SHORT).show()
                 return false
@@ -181,7 +187,6 @@ class BmiActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please populate inches!", Toast.LENGTH_SHORT).show()
                 return false
             }
-
 
         }
         return true
